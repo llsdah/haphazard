@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 /**
@@ -37,7 +38,17 @@ public class CalculatorTest {
                 arguments("+",1,1,2),
                 arguments("-",1,1,0),
                 arguments("*",1,1,1),
-                arguments("/",1,1,1)
+                arguments("/",1,1,1),
+                arguments("/",1,1,4)
         );
+    }
+
+    @DisplayName("예외 부분을 테스트입니다.")
+    @Test
+    void calculatorExceptionTest(){
+        assertThatCode(() -> Calculator.calculator(10,"/",0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("0은 안됩니다. ");
+
     }
 }

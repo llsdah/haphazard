@@ -1,7 +1,7 @@
 package org.example.calculator;
 
 public interface NewArithmeticOperator {
-    boolean supports(String operatr);
+    boolean supports(String operator);
 
-    int c
+    int calculator(int operator1, int operator2);
 }
