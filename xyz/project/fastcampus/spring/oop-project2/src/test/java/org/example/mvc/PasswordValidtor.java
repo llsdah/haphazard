@@ -1,3 +1,5 @@
+package org.example.mvc;
+
 public class PasswordValidtor {
     public static void validate(String password) {
         int length = password.length();

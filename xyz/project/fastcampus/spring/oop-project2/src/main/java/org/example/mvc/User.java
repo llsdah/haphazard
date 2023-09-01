@@ -1,6 +1,4 @@
-package org.example;
-
-import java.security.spec.PSSParameterSpec;
+package org.example.mvc;
 
 public class User {
 

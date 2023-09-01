@@ -1,4 +1,6 @@
-import org.example.PasswordGenerator;
+package org.example.mvc;
+
+import org.example.mvc.PasswordGenerator;
 
 public class WrongPasswordGenerator implements PasswordGenerator {
     @Override
