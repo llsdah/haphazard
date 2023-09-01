@@ -27,7 +27,7 @@ public class CalculatorTest {
     @ParameterizedTest
     @MethodSource("formulaAndResult")
     void calaulatorTest(String operator, int operate1, int operate2, int result){
-        int calculatorResult = Calculator.calculator(operate1,operator,operate2);
+        int calculatorResult = Calculator.calculator(new PositiveOperator(operate1),operator, new PositiveOperator(operate2));
         System.out.println(calculatorResult);
         assertThat(calculatorResult).isEqualTo(result);
     }
@@ -43,12 +43,4 @@ public class CalculatorTest {
         );
     }
 
-    @DisplayName("예외 부분을 테스트입니다.")
-    @Test
-    void calculatorExceptionTest(){
-        assertThatCode(() -> Calculator.calculator(10,"/",0))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("0은 안됩니다. ");
-
-    }
 }

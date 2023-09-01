@@ -10,11 +10,8 @@ public class DivitionOperator implements NewArithmeticOperator{
     }
 
     @Override
-    public int calculator(int operator1, int operator2) {
-
-        if(operator2==0){
-            throw new IllegalArgumentException("???");
-        }
-        return operator1/operator2;
+    public int calculator(PositiveOperator operator1, PositiveOperator operator2) {
+        //0이 안됩니다.
+        return operator1.toInt()/operator2.toInt();
     }
 }

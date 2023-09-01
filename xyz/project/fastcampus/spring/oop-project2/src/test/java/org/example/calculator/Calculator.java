@@ -7,7 +7,7 @@ public class Calculator {
     private static final List<NewArithmeticOperator> arithmeticOperator =
             List.of(new AdditionOperator(), new SubtractOperator(), new MultipleOperator(), new DivitionOperator());
 
-    public static int calculator(int operator1, String operatorStr,int operator2){
+    public static int calculator(PositiveOperator operator1, String operatorStr,PositiveOperator operator2){
 //        int result = ArithmeticOperator.calculate(operator1,operatorStr,operator2);
         System.out.println("oper + "+operatorStr.equals("*"));
         int result = arithmeticOperator.stream()

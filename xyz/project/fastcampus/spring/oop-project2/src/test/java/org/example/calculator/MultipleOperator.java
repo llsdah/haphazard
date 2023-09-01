@@ -10,7 +10,7 @@ public class MultipleOperator implements NewArithmeticOperator{
     }
 
     @Override
-    public int calculator(int operator1, int operator2) {
-        return operator1*operator2;
+    public int calculator(PositiveOperator operator1, PositiveOperator operator2) {
+        return operator1.toInt()*operator2.toInt();
     }
 }
