@@ -14,7 +14,20 @@ public class GradeCalcurator {
     };
 
     public double gradeCalculate(){
-        return 4.5;
+
+        double multipliedCreditAndCourseGrade =0;
+        //
+        for(Course course : courses){
+            multipliedCreditAndCourseGrade += course.getCredit() * course.getGradeToNumber();
+        }
+
+        // 총 학점 수
+        int totalCompletedCredit = courses.stream()
+                .mapToInt(Course::getCredit)
+                .sum();
+
+        System.out.println(multipliedCreditAndCourseGrade);
+        return multipliedCreditAndCourseGrade/totalCompletedCredit;
     }
 
 
