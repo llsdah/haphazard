@@ -1,8 +1,5 @@
-package org.example.calculator;
+package org.example.calculate;
 
-import net.bytebuddy.implementation.bytecode.Addition;
-
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public enum ArithmeticOperator {

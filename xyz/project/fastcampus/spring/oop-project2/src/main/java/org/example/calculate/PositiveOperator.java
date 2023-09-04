@@ -1,4 +1,4 @@
-package org.example.calculator;
+package org.example.calculate;
 
 public class PositiveOperator {
     private final int value;

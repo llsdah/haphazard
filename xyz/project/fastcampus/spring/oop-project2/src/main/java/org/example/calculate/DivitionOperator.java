@@ -1,6 +1,5 @@
-package org.example.calculator;
+package org.example.calculate;
 
-import net.bytebuddy.implementation.bytecode.Throw;
 
 public class DivitionOperator implements NewArithmeticOperator{
 

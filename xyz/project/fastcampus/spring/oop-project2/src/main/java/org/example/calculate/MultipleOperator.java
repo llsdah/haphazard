@@ -1,4 +1,4 @@
-package org.example.calculator;
+package org.example.calculate;
 
 public class MultipleOperator implements NewArithmeticOperator{
 
