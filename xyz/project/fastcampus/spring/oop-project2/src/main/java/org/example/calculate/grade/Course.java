@@ -52,4 +52,8 @@ public class Course {
         System.out.println(grade);
         return grade;
     }
+
+    public double getMultiplyCraditAndGourseGrade() {
+        return credit * getGradeToNumber();
+    }
 }

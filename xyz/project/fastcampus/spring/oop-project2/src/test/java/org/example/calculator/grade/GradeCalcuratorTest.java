@@ -27,9 +27,10 @@ public class GradeCalcuratorTest {
     @DisplayName("학점 계산기")
     @Test
     void calculateTest(){
-        List<Course> courses = List.of(new Course("oop",3,"A+"),
+        List<Course> courseList = List.of(new Course("oop",3,"A+"),
                 new Course("자료구조",3,"A+"));
 
+        Courses courses = new Courses(courseList);
         GradeCalcurator gradeCalcurator = new GradeCalcurator(courses);
         Double gradeResult = gradeCalcurator.gradeCalculate();
 
