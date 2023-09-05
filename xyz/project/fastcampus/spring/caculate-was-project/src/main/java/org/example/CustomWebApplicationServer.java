@@ -19,12 +19,13 @@ public class CustomWebApplicationServer {
 
     public void start(){
         try(ServerSocket serverSocket = new ServerSocket(port)){
-            logger.info("[CustomWebApplicationServer] started {} port",port);
+            logger.info("[CustomWebApplicationServer] started {} port", port);
 
             Socket clientSocket;
             logger.info("[CustomWebApplicationServer] wait for client ");
             while((clientSocket = serverSocket.accept())!=null){
                 logger.info("[CustomWebApplicationServer] client connected ");
+                logger.info("[CustomWebApplicationServer] responseCode {} ", clientSocket.getPort());
 
             }
         } catch (IOException e) {
