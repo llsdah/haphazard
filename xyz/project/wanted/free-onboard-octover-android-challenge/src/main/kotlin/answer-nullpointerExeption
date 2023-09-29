@@ -1,0 +1,3 @@
+NullPointerException : 런타임 예외 이며, 프로그램에서 심제 값이 나닌 null을 가지고 있는 객체 혹은 변수를 호출할 때 발생되는 예외입니다.
+
+방치 방법 : if문 등으로 null을 사전에 체크하는 방법이 있습니다. 또한 Java Optional.ofNullable 을 통한 처리도 가능합니다.
