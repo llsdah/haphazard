@@ -10,10 +10,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CustomWebApplicationServer {
 
     private final static Logger logger = LoggerFactory.getLogger(CustomWebApplicationServer.class);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(10);
     private final int port;
 
     public CustomWebApplicationServer(int port) {
@@ -33,7 +36,13 @@ public class CustomWebApplicationServer {
             while((clientSocket = serverSocket.accept())!=null){
                 logger.info("[CustomWebApplicationServer] client connected ");
 
-                new Thread(new ClientRequestHandler(clientSocket)).start();
+                /**
+                 * step - 사용자 요청이 들어올 때마다 Threa를 새로 생성해서 사용자 요청을 처리하도록 한다. 
+                 * => 메모리는 잡아 먹는 비싼 작업입니다. cpu contextswitching 발생 가능, 메모리 증가 가능
+                 * => threadpool
+                 */
+                executorService.execute(new ClientRequestHandler(clientSocket));
+                //new Thread(new ClientRequestHandler(clientSocket)).start();
 
             }
 
