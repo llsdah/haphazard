@@ -25,7 +25,7 @@ public class CalulatorServlet extends HttpServlet {
          * url 인코딩 주의 = 퍼센트 인코딩!
          * url로 서용할 수 없는 단어 인코딩되는 값을 넣고 수행
          * + => %2D
-         * 인코딩 문자는 3개가 한세트 
+         * 인코딩 문자는 3개가 한세트
          */
 
         logger.info("service");

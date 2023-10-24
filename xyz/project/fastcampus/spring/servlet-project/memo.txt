@@ -24,3 +24,14 @@ init(), service destoy , get
 Spring 개발시 servlet 필요
 
 DispatherServlet
+
+
+DBCP database Connection Pool
+- 미리 일정량의 DB 커넥션을 생성해 풀에 저장해 두고 있다가 Http 요청에 따라 필요할때 풀에서 커넥션을 가져다 사용하는 기법
+- spring boot 2.0 이상 default connection pool은 HikariCP 사용, ( apache common CP, JDBC 등 )
+- data source란 커넥션 획득의 표준
+
+커넥션 풀 사용시 주의 사항
+- 커넥션의 사용 주체는 was 스레드(http 웹서버 스레드) 커넥션 갯수는 was 스레드 수와 함께 고려
+- 커넥션 크면 메모리 소모가 크고, 동시 접속자가 많더라도 사용 대기 시간이 상대적으로 줄고,
+반대로 커넥션 수가 작으면 메모리 소모는 작소 대기가 김
