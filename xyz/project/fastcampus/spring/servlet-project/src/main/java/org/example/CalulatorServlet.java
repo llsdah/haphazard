@@ -15,9 +15,12 @@ import java.io.PrintWriter;
 public class CalulatorServlet implements Servlet {
 
     private static final Logger logger = LoggerFactory.getLogger(CalulatorServlet.class);
+
+    private ServletConfig servletConfig;
     @Override
     public void init(ServletConfig config) throws ServletException {
         logger.info("init");
+        this.servletConfig = config;
     }
 
     @Override
@@ -36,12 +39,13 @@ public class CalulatorServlet implements Servlet {
 
     @Override
     public void destroy() {
+        // 자원 해제
 
     }
 
     @Override
     public ServletConfig getServletConfig() {
-        return null;
+        return this.servletConfig;
     }
 
     @Override
