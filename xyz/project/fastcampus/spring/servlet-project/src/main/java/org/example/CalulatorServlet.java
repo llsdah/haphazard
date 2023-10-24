@@ -12,16 +12,9 @@ import java.io.PrintWriter;
 
 
 @WebServlet("/calculate")
-public class CalulatorServlet implements Servlet {
+public class CalulatorServlet extends GenericServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(CalulatorServlet.class);
-
-    private ServletConfig servletConfig;
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        logger.info("init");
-        this.servletConfig = config;
-    }
 
     @Override
     public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
@@ -35,22 +28,6 @@ public class CalulatorServlet implements Servlet {
         PrintWriter writer = response.getWriter();
         writer.println(result);
 
-    }
-
-    @Override
-    public void destroy() {
-        // 자원 해제
-
-    }
-
-    @Override
-    public ServletConfig getServletConfig() {
-        return this.servletConfig;
-    }
-
-    @Override
-    public String getServletInfo() {
-        return null;
     }
 
 }
