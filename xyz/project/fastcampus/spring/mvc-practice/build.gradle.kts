@@ -11,7 +11,19 @@ repositories {
 
 dependencies {
 
+    // embedded tomcat
+    implementation("org.apache.tomcat.embed:tomcat-embed-core:8.5.42")
+    implementation ("org.apache.tomcat.embed:tomcat-embed-jasper:8.5.42")
+    implementation ("com.zaxxer:HikariCP:5.0.1")
+    implementation ("org.springframework:spring-jdbc:5.3.22")
+    implementation ("com.h2database:h2:2.1.214")
+
     implementation("javax.servlet:javax.servlet-api:4.0.1")
+
+    //JSP
+    implementation("javax.servlet:jstl:1.2")
+
+
     implementation("org.reflections:reflections:0.10.2")
     implementation ("ch.qos.logback:logback-classic:1.2.3")
 

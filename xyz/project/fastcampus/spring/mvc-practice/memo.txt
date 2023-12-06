@@ -7,3 +7,7 @@
 
 내용
 모든 컨트롤러 어노테이션을 찾아라
+
+
+MVC
+- forward 와 redirect 의  차이점
