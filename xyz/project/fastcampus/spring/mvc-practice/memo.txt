@@ -11,3 +11,5 @@
 
 MVC
 - forward 와 redirect 의  차이점
+- dispatherServlet -> handlerMapping -> 핸들러 가지고옮 -> 핸들러 어탭터 통해서 실행
+-> 모델 뷰값 받아서 -> 뷰 리졸버 전달 -> 뷰 보임

@@ -1,16 +1,15 @@
 package org.example.mvc;
 
-import org.example.controller.RequestMethods;
-import org.example.mvc.controller.Controller;
-import org.example.mvc.controller.HandlerKey;
+import org.example.mvc.controller.RequestMethods;
 import org.example.mvc.controller.RequestMappingHandlerMapping;
-import org.example.view.JspViewResolver;
-import org.example.view.View;
-import org.example.view.ViewResolver;
+import org.example.mvc.controller.SimpleHadlerAdaptor;
+import org.example.mvc.view.JspViewResolver;
+import org.example.mvc.view.ModelAndView;
+import org.example.mvc.view.View;
+import org.example.mvc.view.ViewResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,33 +22,57 @@ public class DispatcherServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
+    private List<HandlerMapping> handlerMappings;
+
+    private List<HandlerAdaptor> handlerAdaptorList;
     private List<ViewResolver> viewResolverList;
 
-    private RequestMappingHandlerMapping requestMappingHandlerMapping;
     @Override
     public void init() throws ServletException {
-        requestMappingHandlerMapping = new RequestMappingHandlerMapping();
+        RequestMappingHandlerMapping requestMappingHandlerMapping = new RequestMappingHandlerMapping();
         requestMappingHandlerMapping.init();
 
-        viewResolverList =Collections.singletonList(new JspViewResolver());
+        AnnotationHandlerMapping annotationHandlerMapping = new AnnotationHandlerMapping("org.example");
+        annotationHandlerMapping.initialize();
+
+        handlerMappings = List.of(requestMappingHandlerMapping, annotationHandlerMapping);
+
+        handlerAdaptorList = List.of(new SimpleHadlerAdaptor(), new AnnotationHandlerAdaptor());
+        viewResolverList = Collections.singletonList(new JspViewResolver());
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         logger.info("start dispathcerSevlet ");
+        String requestURI = request.getRequestURI();
+        RequestMethods requestMethods = RequestMethods.valueOf(request.getMethod());
 
         try{
+            logger.info("look for ["+requestMethods+","+requestURI+"]");
             // 해당 요청이 어떤것인지 확인
-           Controller handler = requestMappingHandlerMapping.findHanler(
-                   new HandlerKey(RequestMethods.valueOf(request.getMethod()),
-                           request.getRequestURI())
-           );
-           String viewName = handler.HandleRequest(request, response);
-           logger.info("view name [{}]",viewName);
+           Object handler = handlerMappings.stream()
+                           .filter(hm -> hm.findHanler(new HandlerKey(requestMethods,requestURI)) != null)
+                   .map(hmp -> hmp.findHanler(new HandlerKey(requestMethods,requestURI)))
+                   .findFirst()
+                   .orElseThrow(() -> new ServletException("No handler for ["+requestMethods+","+requestURI+"]"));
+
+           logger.info("여기까지는..?");
+           //findHanler(new HandlerKey(RequestMethods.valueOf(request.getMethod()),request.getRequestURI())
+
+           //String viewName = handler.HandleRequest(request, response);
+
+           HandlerAdaptor handlerAdaptor = handlerAdaptorList.stream()
+                   .filter(hand -> hand.supports(handler))
+                   .findFirst()
+                           .orElseThrow(() -> new ServletException("No adapter handler ["+handler+"]"));
+
+           ModelAndView modelAndView = handlerAdaptor.handle(request,response,handler);
+
+           logger.info("view name [{}]",modelAndView.getViewName());
            for(ViewResolver viewResolver : viewResolverList){
 
-               View view = viewResolver.resolverView(viewName);
-               view.rander(new HashMap<>(), request, response);
+               View view = viewResolver.resolverView(modelAndView.getViewName());
+               view.rander(modelAndView.getModel(), request, response);
 
            }
 
