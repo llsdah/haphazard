@@ -13,3 +13,10 @@ MVC
 - forward 와 redirect 의  차이점
 - dispatherServlet -> handlerMapping -> 핸들러 가지고옮 -> 핸들러 어탭터 통해서 실행
 -> 모델 뷰값 받아서 -> 뷰 리졸버 전달 -> 뷰 보임
+
+
+mvc vs Spring mvc
+
+- 스프링 기본안 88888888888888888888866:
+dispatherServlet 요청 받고 -> handlerMapping에서 핸들러 선택 -> handlerAdaptor에서 선택된 핸들러 실행 ->
+핸들러가 viewName 리던 -> dispatherServlet 이 viewname을 viewResolver에게 전달 -> view 선택 결과 반환

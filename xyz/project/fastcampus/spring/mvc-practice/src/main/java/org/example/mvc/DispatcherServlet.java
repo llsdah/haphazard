@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
-@WebServlet("/")
+@WebServlet("/") // 모든 요청에 대해 받는다.
 public class DispatcherServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -56,9 +56,7 @@ public class DispatcherServlet extends HttpServlet {
                    .findFirst()
                    .orElseThrow(() -> new ServletException("No handler for ["+requestMethods+","+requestURI+"]"));
 
-           logger.info("여기까지는..?");
            //findHanler(new HandlerKey(RequestMethods.valueOf(request.getMethod()),request.getRequestURI())
-
            //String viewName = handler.HandleRequest(request, response);
 
            HandlerAdaptor handlerAdaptor = handlerAdaptorList.stream()
